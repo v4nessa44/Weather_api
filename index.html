@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Weather Dashboard</title>
+</head>
+
+<body>
+  <h1>Weather Dashboard</h1>
+  <form id="search-form">
+    <input type="text" id="city-input" placeholder="Enter city">
+    <button type="submit">Search</button>
+  </form>
+  <div id="current-weather">
+    <h1>Today</h1>
+    <p>Humidity: <span id='currentHumidity'></span></p>
+    <p>Temp: <span id='currentTemp'></span></p>
+    <p>windspeed: <span id='currentWindspeed'></span></p>
+
+  </div>
+  <div id="forecast">
+    <h1>Fivedayforecast</h1>
+    <div>
+      <p>Humidity: <span id='Day1Humidity'></span></p>
+      <p>Temp: <span id='Day1Temp'></span></p>
+      <p>windspeed: <span id='Day1Windspeed'></span></p>
+    </div>
+
+    <div>
+      <p>Humidity1: <span id='Day2Humidity'></span></p>
+      <p>Temp1: <span id='Day2Temp'></span></p>
+      <p>windspeed1: <span id='Day2Windspeed'></span></p>
+    </div>
+
+    <div>
+      <p>Humidity2: <span id='Day3Humidity'></span></p>
+      <p>Temp2: <span id='Day3Temp'></span></p>
+      <p>windspeed2: <span id='Day3Windspeed'></span></p>
+    </div>
+
+    <div>
+      <p>Humidity3: <span id='Day4Humidity'></span></p>
+      <p>Temp3: <span id='Day4Temp'></span></p>
+      <p>windspeed3: <span id='Day4Windspeed'></span></p>
+    </div>
+
+    <div>
+      <p>Humidity4: <span id='Day5Humidity'></span></p>
+      <p>Temp4: <span id='Day5Temp'></span></p>
+      <p>windspeed4: <span id='Day5Windspeed'></span></p>
+    </div>
+  </div>
+  <div id="search-history"></div>
+
+  <script>
+    const apiKey = 'f48bb57b07562917281a38e3b5b36c22';
+    const searchForm = document.getElementById('search-form');
+    const cityInput = document.getElementById('city-input');
+    const currentWeather = document.getElementById('current-weather');
+    const forecast = document.getElementById('forecast');
+    const searchHistory = document.getElementById('search-history');
+    let cities = [];
+
+    searchForm.addEventListener('submit', function (event) {
+      event.preventDefault();
+      const cityName = cityInput.value.trim();
+      if (cityName === '') return;
+      console.log(cityName)
+      const api = 'https://api.openweathermap.org/data/2.5/weather?q=' + cityName + '&appid=' + apiKey;
+      fetch(api).then(function (response) {
+        return response.json()
+      }).then(function (data) {
+        console.log(data)
+        const windSpeedEl = document.getElementById('currentWindspeed');
+        const HumidityEl = document.getElementById('currentHumidity');
+        const TempEl = document.getElementById('currentTemp');
+        windSpeedEl.textContent = data.wind.speed
+        HumidityEl.textContent = data.main.humidity
+        TempEl.textContent = data.main.temp
+      })
+
+      const api2 = 'https://api.openweathermap.org/data/2.5/forecast?q=' + cityName + '&appid=' + apiKey;
+      fetch(api2).then(function (response) {
+        return response.json()
+      }).then(function (data) {
+        console.log(data)
+        const windSpeedEl = document.getElementById('Day1Windspeed');
+        const HumidityEl = document.getElementById('Day1Humidity');
+        const TempEl = document.getElementById('Day1Temp');
+        windSpeedEl.textContent = data.list.speed
+        HumidityEl.textContent = data.humidity
+        TempEl.textContent = data.list.temp
+
+        const windSpeed1El = document.getElementById('Day2Windspeed');
+        const Humidity1El = document.getElementById('Day2Humidity');
+        const Temp1El = document.getElementById('Day2Temp');
+        windSpeedEl.textContent = data.list.speed
+        HumidityEl.textContent = data.humidity
+        TempEl.textContent = data.list.temp
+
+        const windSpeed2El = document.getElementById('Day2Windspeed');
+        const Humidity2El = document.getElementById('Day2Humidity');
+        const Temp2El = document.getElementById('Day2Temp');
+        windSpeedEl.textContent = data.list.speed
+        HumidityEl.textContent = data.humidity
+        TempEl.textContent = data.list.temp
+
+        const windSpeed3El = document.getElementById('Day2Windspeed');
+        const Humidity3El = document.getElementById('Day2Humidity');
+        const Temp3El = document.getElementById('Day2Temp');
+        windSpeedEl.textContent = data.list.speed
+        HumidityEl.textContent = data.humidity
+        TempEl.textContent = data.list.temp
+
+        const windSpeed4El = document.getElementById('Day2Windspeed');
+        const Humidity4El = document.getElementById('Day2Humidity');
+        const Temp4El = document.getElementById('Day2Temp');
+        windSpeedEl.textContent = data.list.speed
+        HumidityEl.textContent = data.humidity
+        TempEl.textContent = data.list.temp
+
+        
+      })
+      // Call API to get weather data
+      // Update currentWeather and forecast sections with data
+      // Add the city to the search history
+    });
+
+    searchHistory.addEventListener('click', function (event) {
+      const selectedCity = event.target.textContent;
+      if (selectedCity) {
+        // Fetch and display weather data for the selected city
+      }
+    });
+
+    // Function to fetch weather data from API and update UI
+    function fetchWeatherData(cityName) {
+      // Use fetch or another method to get weather data
+      // Update currentWeather and forecast sections with received data
+    }
+
+    // Function to update search history
+    function updateSearchHistory(cityName) {
+      // Add cityName to cities array if not already present
+      // Update the search history UI
+    }
+
+    // Initial code to load any default data or perform setup
+
+  </script>
+</body>
+
+</html>
